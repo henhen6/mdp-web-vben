@@ -81,6 +81,12 @@ interface RouteMeta {
    */
   ignoreAccess?: boolean;
   /**
+   * 忽略登录，直接可以访问
+   * 忽略了登录必然也是忽略了权限
+   * @default false
+   */
+  ignoreLogin?: boolean;
+  /**
    * 开启KeepAlive缓存
    */
   keepAlive?: boolean;
@@ -135,13 +141,24 @@ type RouteRecordStringComponent<T = string> = Omit<
 type ComponentRecordType = Record<string, () => Promise<Component>>;
 
 interface GenerateMenuAndRoutesOptions {
+  // 后置前端配置的常量路由
+  afterRoutes?: RouteRecordRaw[];
+  // 前置前端配置的路由
+  beforeRoutes?: RouteRecordRaw[];
+  // 加载菜单路由数据的异步函数
   fetchMenuListAsync?: () => Promise<RouteRecordStringComponent[]>;
+  // 403 页面组件
   forbiddenComponent?: RouteRecordRaw['component'];
+  // 布局组件映射表
   layoutMap?: ComponentRecordType;
+  // 页面组件映射表
   pageMap?: ComponentRecordType;
-  roles?: string[];
+  // 用户角色数组
+  // roles?: string[];
+  // Vue Router 实例
   router: Router;
-  routes: RouteRecordRaw[];
+  // 纯前端配置的路由
+  // routes: RouteRecordRaw[];
 }
 
 export type {

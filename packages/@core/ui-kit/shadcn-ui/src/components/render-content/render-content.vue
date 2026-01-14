@@ -5,17 +5,19 @@ import { defineComponent, h } from 'vue';
 
 import { isFunction, isObject, isString } from '@vben-core/shared/utils';
 
+// 抽离 content 的类型
+type ContentType = (() => []) | (() => any) | Component | string;
+
 export default defineComponent({
   name: 'RenderContent',
   props: {
     content: {
-      default: undefined as
-        | PropType<(() => any) | Component | string>
-        | undefined,
-      type: [Object, String, Function],
+      default: undefined,
+      type: [Object, Array, String, Function] as PropType<ContentType>,
     },
+    // 是否支持字符串中的换行符
     renderBr: {
-      default: false,
+      default: true,
       type: Boolean,
     },
   },
@@ -25,21 +27,26 @@ export default defineComponent({
         return null;
       }
       const isComponent =
+        !Array.isArray(props.content) &&
         (isObject(props.content) || isFunction(props.content)) &&
         props.content !== null;
       if (!isComponent) {
-        if (props.renderBr && isString(props.content)) {
-          const lines = props.content.split('\n');
+        if (props.renderBr) {
+          let lines: string[] = [];
+          if (Array.isArray(props.content)) {
+            lines = props.content as unknown as string[];
+          } else if (isString(props.content)) {
+            lines = props.content.split('\n');
+          }
           const result = [];
           for (const [i, line] of lines.entries()) {
             result.push(h('p', { key: i }, line));
-            // if (i < lines.length - 1) {
-            //   result.push(h('br'));
-            // }
           }
           return result;
         } else {
-          return props.content;
+          return Array.isArray(props.content)
+            ? props.content.join('')
+            : props.content;
         }
       }
       return h(props.content as never, {

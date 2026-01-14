@@ -76,6 +76,26 @@ interface HttpResponse<T = any> {
   data: T;
   message: string;
 }
+enum ResultCodeEnum {
+  // 未能读取到有效Token
+  CODE_11011 = 11_011,
+  // token 无效: token 没有绑定用户id
+  CODE_11012 = 11_012,
+  // token 已过期
+  CODE_11013 = 11_013,
+  // token 已被顶下线
+  CODE_11014 = 11_014,
+  // token 已被踢下线
+  CODE_11015 = 11_015,
+  // 已被冻结
+  CODE_11016 = 11_016,
+  // 获取 Token-Session 时提供的 token 为空
+  CODE_11073 = 11_073,
+  // 获取 Token-Session 时提供的 token 为无效 token
+  CODE_11074 = 11_074,
+  // 访问成功
+  SUCCESS = 0,
+}
 
 export type {
   HttpResponse,
@@ -88,3 +108,5 @@ export type {
   ResponseInterceptorConfig,
   SseRequestOptions,
 };
+
+export { ResultCodeEnum };

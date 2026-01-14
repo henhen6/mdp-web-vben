@@ -1,0 +1,16 @@
+{
+  "title": { "table": "岗位" },
+  "id": "ID",
+  "orgId": "所属组织",
+  "name": "名称",
+  "state": "状态",
+  "remarks": "备注",
+  "createdAt": "创建时间",
+  "createdBy": "创建人",
+  "updatedAt": "修改时间",
+  "updatedBy": "修改人",
+  "tips": {
+    "stateConfirm": "你要切换{name}的状态吗？",
+    "successTip": "操作成功"
+  }
+}

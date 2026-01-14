@@ -1,21 +1,28 @@
 {
   "formRules": {
     "required": "请输入{0}",
+    "fieldRequired": "此项必填",
     "selectRequired": "请选择{0}",
-    "minLength": "{0}至少{1}个字符",
-    "maxLength": "{0}最多{1}个字符",
+    "typeError": "类型错误",
+    "minLength": "{0}不能少于{1}个字符",
+    "maxLength": "{0}不能超过{1}个字符",
     "length": "{0}长度必须为{1}个字符",
     "alreadyExists": "{0} `{1}` 已存在",
     "startWith": "{0}必须以 {1} 开头",
-    "invalidURL": "请输入有效的链接",
-    "sizeLimit": "文件大小不能超过 {0}MB",
-    "previewWarning": "无法打开文件，没有可用的URL或预览地址"
+    "invalidURL": "请输入有效的链接"
   },
   "actionTitle": {
+    "operation": "操作栏",
+    "batchOperation": "批量操作",
+    "moreOperation": "更多操作",
+    "mark": "标记已读",
     "edit": "修改{0}",
     "create": "新增{0}",
+    "append": "追加{0}",
     "delete": "删除{0}",
-    "view": "查看{0}"
+    "view": "查看{0}",
+    "expandAll": "展开所有",
+    "collapseAll": "收起所有"
   },
   "actionMessage": {
     "deleteConfirm": "确定删除 {0} 吗？",
@@ -26,8 +33,7 @@
   },
   "placeholder": {
     "input": "请输入",
-    "select": "请选择",
-    "upload": "点击上传"
+    "select": "请选择"
   },
   "captcha": {
     "title": "请完成安全验证",
@@ -79,7 +85,8 @@
     "document": "文档",
     "qa": "问题 & 帮助",
     "setting": "设置",
-    "logoutTip": "是否退出登录？",
+    "logoutTip": "退出当前应用，其他应用不会退出，确认吗？",
+    "signoutTip": "退出所有应用，已登录的所有应用都将一起退出，确认吗？",
     "viewAll": "查看所有消息",
     "notifications": "通知",
     "markAllAsRead": "全部标记为已读",
@@ -110,5 +117,49 @@
       "setTimezone": "设置时区",
       "setSuccess": "时区设置成功"
     }
+  },
+  "tree": {
+    "selectAll": "选择全部",
+    "unSelectAll": "取消选择",
+    "expandAll": "展开全部",
+    "unExpandAll": "折叠全部",
+    "checkStrictly": "关联",
+    "checkUnStrictly": "不关联"
+  },
+  "upload": {
+    "save": "保存",
+    "upload": "上传",
+    "imgUpload": "图片上传",
+    "uploaded": "已上传",
+    "operating": "操作",
+    "del": "删除",
+    "download": "下载",
+    "saveWarn": "请等待文件上传后，保存!",
+    "saveError": "没有上传成功的文件，无法保存!",
+    "preview": "预览",
+    "choose": "选择文件",
+    "accept": "支持{0}格式",
+    "acceptUpload": "只能上传{0}格式文件",
+    "maxSize": "单个文件不超过{0}MB",
+    "maxSizeMultiple": "只能上传不超过{0}MB的文件!",
+    "maxNumber": "最多只能上传{0}个文件",
+    "legend": "略缩图",
+    "fileName": "文件名",
+    "fileSize": "文件大小",
+    "fileStatue": "状态",
+    "pending": "待上传",
+    "startUpload": "开始上传",
+    "uploadSuccess": "上传成功",
+    "uploadError": "上传失败",
+    "uploading": "上传中",
+    "uploadWait": "请等待文件上传结束后操作",
+    "reUploadFailed": "重新上传失败文件",
+    "uploadHelpMessage": "请上传不超过{size}的{ext}格式文件",
+    "unknownFileType": "未知的文件类型, 无法上传",
+    "confirmDelete": "确认删除文件 {0}?",
+    "clickOrDrag": "点击或拖动文件到这个区域上传"
+  },
+  "profile": {
+    "title": "个人信息"
   }
 }

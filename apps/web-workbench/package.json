@@ -1,0 +1,76 @@
+{
+  "name": "@vben/web-workbench",
+  "version": "0.0.8",
+  "homepage": "https://mddata.top",
+  "bugs": "https://github.com/vbenjs/vue-vben-admin/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vbenjs/vue-vben-admin.git",
+    "directory": "apps/web-workbench"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "henhen6",
+    "email": "ann.vben@gmail.com",
+    "url": "https://github.com/anncwb"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "pnpm vite build --mode production",
+    "build:boot": "pnpm cross-env VITE_GLOB_MODE=boot vite build --mode production",
+    "build:cloud": "pnpm cross-env VITE_GLOB_MODE=cloud vite build --mode production",
+    "build:analyze": "pnpm vite build --mode analyze",
+    "dev": "pnpm cross-env vite --mode development",
+    "dev:boot": "pnpm cross-env VITE_GLOB_MODE=boot vite --mode development",
+    "dev:cloud": "pnpm cross-env VITE_GLOB_MODE=cloud vite --mode development",
+    "preview": "vite preview",
+    "typecheck": "vue-tsc --noEmit --skipLibCheck"
+  },
+  "imports": {
+    "#/*": "./src/*"
+  },
+  "dependencies": {
+    "@ant-design/icons-vue": "catalog:",
+    "@codemirror/lang-html": "catalog:",
+    "@codemirror/lang-java": "catalog:",
+    "@codemirror/lang-javascript": "catalog:",
+    "@codemirror/lang-json": "catalog:",
+    "@codemirror/lang-markdown": "catalog:",
+    "@codemirror/lang-sql": "catalog:",
+    "@codemirror/lang-xml": "catalog:",
+    "@codemirror/theme-one-dark": "catalog:",
+    "@iconify/json": "catalog:",
+    "@vben-core/design": "workspace:*",
+    "@vben-core/shadcn-ui": "workspace:*",
+    "@vben-core/shared": "workspace:*",
+    "@vben/access": "workspace:*",
+    "@vben/common-ui": "workspace:*",
+    "@vben/components": "workspace:*",
+    "@vben/constants": "workspace:*",
+    "@vben/hooks": "workspace:*",
+    "@vben/icons": "workspace:*",
+    "@vben/layouts": "workspace:*",
+    "@vben/locales": "workspace:*",
+    "@vben/plugins": "workspace:*",
+    "@vben/preferences": "workspace:*",
+    "@vben/request": "workspace:*",
+    "@vben/stores": "workspace:*",
+    "@vben/styles": "workspace:*",
+    "@vben/types": "workspace:*",
+    "@vben/utils": "workspace:*",
+    "@vueuse/core": "catalog:",
+    "aieditor": "catalog:",
+    "ant-design-vue": "catalog:",
+    "consola": "catalog:",
+    "dayjs": "catalog:",
+    "json-bigint": "catalog:",
+    "pinia": "catalog:",
+    "qs": "catalog:",
+    "vue": "catalog:",
+    "vue-codemirror": "catalog:",
+    "vue-router": "catalog:"
+  },
+  "devDependencies": {
+    "less": "^4.3.0"
+  }
+}

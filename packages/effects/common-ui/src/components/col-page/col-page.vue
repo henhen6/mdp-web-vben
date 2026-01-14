@@ -43,7 +43,8 @@ const delegatedSlots = computed(() => {
 const leftPanelRef = ref<InstanceType<typeof ResizablePanel>>();
 
 function expandLeft() {
-  leftPanelRef.value?.expand();
+  leftPanelRef.value?.resize(props.leftWidth);
+  // leftPanelRef.value?.expand();
 }
 
 function collapseLeft() {

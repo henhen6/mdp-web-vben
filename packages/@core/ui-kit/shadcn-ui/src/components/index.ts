@@ -1,5 +1,6 @@
 export * from './avatar';
 export * from './back-top';
+export * from './behavior-captcha';
 export * from './breadcrumb';
 export * from './button';
 export * from './checkbox';
@@ -10,6 +11,7 @@ export * from './expandable-arrow';
 export * from './full-screen';
 export * from './hover-card';
 export * from './icon';
+export * from './input-captcha';
 export * from './input-password';
 export * from './logo';
 export * from './pin-input';

@@ -1,10 +1,18 @@
-import type { RouteMeta as IRouteMeta } from '@vben-core/typings';
+import type {
+  AxiosRequestConfigExt,
+  RouteMeta as IRouteMeta,
+} from '@vben-core/typings';
 
 import 'vue-router';
 
 declare module 'vue-router' {
   // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   interface RouteMeta extends IRouteMeta {}
+}
+
+declare module 'axios' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
+  interface AxiosRequestConfig extends AxiosRequestConfigExt {}
 }
 
 export interface VbenAdminProAppConfigRaw {

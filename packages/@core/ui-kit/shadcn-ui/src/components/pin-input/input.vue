@@ -14,7 +14,9 @@ const {
   codeLength = 6,
   createText = async () => {},
   disabled = false,
-  handleSendCode = async () => {},
+  handleSendCode = async () => {
+    return true;
+  },
   loading = false,
   maxTime = 60,
 } = defineProps<PinInputProps>();
@@ -59,9 +61,12 @@ function handleComplete(e: string[]) {
 async function handleSend(e: Event) {
   try {
     e?.preventDefault();
+    const flag = await handleSendCode();
+    if (!flag) {
+      return;
+    }
     countdown.value = maxTime;
     startCountdown();
-    await handleSendCode();
   } catch (error) {
     console.error('Failed to send code:', error);
     // Consider emitting an error event or showing a notification
@@ -78,6 +83,11 @@ function startCountdown() {
   }
 }
 
+function resetCountdown() {
+  countdown.value = 0;
+  window.clearTimeout(timer.value);
+}
+
 onBeforeUnmount(() => {
   countdown.value = 0;
   clearTimeout(timer.value);
@@ -86,6 +96,12 @@ onBeforeUnmount(() => {
 const id = useId();
 
 const pinType = 'text' as const;
+
+defineExpose({
+  countdown,
+  startCountdown,
+  resetCountdown,
+});
 </script>
 
 <template>

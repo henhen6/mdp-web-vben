@@ -1,0 +1,110 @@
+{
+  "name": "@vben/components",
+  "version": "5.5.9",
+  "homepage": "https://github.com/vbenjs/vue-vben-admin",
+  "bugs": "https://github.com/vbenjs/vue-vben-admin/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vbenjs/vue-vben-admin.git",
+    "directory": "packages/effects/components"
+  },
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "exports": {
+    "./api": {
+      "types": "./src/api/index.ts",
+      "default": "./src/api/index.ts"
+    },
+    "./adapter": {
+      "types": "./src/adapter/index.ts",
+      "default": "./src/adapter/index.ts"
+    },
+    "./form": {
+      "types": "./src/form/index.ts",
+      "default": "./src/form/index.ts"
+    },
+    "./styles": {
+      "import": "./src/dynamic-schema-form/styles/index.less",
+      "require": "./src/dynamic-schema-form/styles/index.less"
+    },
+    "./styles/common-detail.less": {
+      "import": "./src/dynamic-schema-form/styles/common-detail.less",
+      "require": "./src/dynamic-schema-form/styles/common-detail.less"
+    },
+    "./styles/common-form.less": {
+      "import": "./src/dynamic-schema-form/styles/common-form.less",
+      "require": "./src/dynamic-schema-form/styles/common-form.less"
+    },
+    "./hooks": {
+      "types": "./src/hooks/index.ts",
+      "default": "./src/hooks/index.ts"
+    },
+    "./icon": {
+      "types": "./src/icon/index.ts",
+      "default": "./src/icon/index.ts"
+    },
+    "./basic": {
+      "types": "./src/basic/index.ts",
+      "default": "./src/basic/index.ts"
+    },
+    "./store": {
+      "types": "./src/store/index.ts",
+      "default": "./src/store/index.ts"
+    },
+    "./table-action": {
+      "types": "./src/table-action/index.ts",
+      "default": "./src/table-action/index.ts"
+    },
+    "./utils": {
+      "types": "./src/utils/index.ts",
+      "default": "./src/utils/index.ts"
+    },
+    "./view": {
+      "types": "./src/view/index.ts",
+      "default": "./src/view/index.ts"
+    },
+    "./description": {
+      "types": "./src/description/index.ts",
+      "default": "./src/description/index.ts"
+    },
+    "./container": {
+      "types": "./src/container/index.ts",
+      "default": "./src/container/index.ts"
+    },
+    "./transition": {
+      "types": "./src/transition/index.ts",
+      "default": "./src/transition/index.ts"
+    },
+    "./collapse": {
+      "types": "./src/collapse/index.ts",
+      "default": "./src/collapse/index.ts"
+    }
+  },
+  "dependencies": {
+    "@ant-design/icons-vue": "catalog:",
+    "@iconify/json": "catalog:",
+    "@vben/access": "workspace:*",
+    "@vben/common-ui": "workspace:*",
+    "@vben/constants": "workspace:*",
+    "@vben/hooks": "workspace:*",
+    "@vben/icons": "workspace:*",
+    "@vben/locales": "workspace:*",
+    "@vben/plugins": "workspace:*",
+    "@vben/preferences": "workspace:*",
+    "@vben/request": "workspace:*",
+    "@vben/stores": "workspace:*",
+    "@vben/types": "workspace:*",
+    "@vben/utils": "workspace:*",
+    "@vueuse/core": "catalog:",
+    "ant-design-vue": "catalog:",
+    "pinia": "catalog:",
+    "resize-observer-polyfill": "^1.5.1",
+    "vue": "catalog:"
+  },
+  "devDependencies": {
+    "less": "^4.3.0"
+  }
+}

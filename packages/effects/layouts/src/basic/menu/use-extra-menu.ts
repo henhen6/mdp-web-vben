@@ -7,7 +7,7 @@ import { useRoute } from 'vue-router';
 
 import { preferences } from '@vben/preferences';
 import { useAccessStore } from '@vben/stores';
-import { findRootMenuByPath } from '@vben/utils';
+import { findRootMenuByPath, isEmptyOrUnDef } from '@vben/utils';
 
 import { useNavigation } from './use-navigation';
 
@@ -96,7 +96,9 @@ function useExtraMenu(useRootMenus?: ComputedRef<MenuRecordRaw[]>) {
   };
 
   function calcExtraMenus(path: string) {
-    const currentPath = route.meta?.activePath || path;
+    const currentPath = isEmptyOrUnDef(route.meta?.activePath)
+      ? path
+      : route.meta?.activePath;
     const { findMenu, rootMenu, rootMenuPath } = findRootMenuByPath(
       menus.value,
       currentPath,

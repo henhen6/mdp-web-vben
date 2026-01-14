@@ -20,7 +20,7 @@ const props = withDefaults(defineProps<TreeProps>(), treePropsDefaults());
 
 const emits = defineEmits<{
   expand: [value: FlattenedItem<Recordable<any>>];
-  select: [value: FlattenedItem<Recordable<any>>];
+  select: [value: FlattenedItem<Recordable<any>>, isSelected: boolean];
 }>();
 
 interface InnerFlattenItem<T = Recordable<any>, P = number | string> {
@@ -246,7 +246,7 @@ function onSelect(item: FlattenedItem<Recordable<any>>, isSelected: boolean) {
       });
   }
   updateTreeValue();
-  emits('select', item);
+  emits('select', item, isSelected);
 }
 
 defineExpose({
@@ -294,7 +294,7 @@ defineExpose({
       :class="
         cn('my-0.5 flex w-full items-center p-1', bordered ? 'border-b' : '')
       "
-      v-if="treeData.length > 0"
+      v-if="treeData.length > 0 && showCheckAll"
     >
       <div
         class="flex size-5 flex-1 cursor-pointer items-center"

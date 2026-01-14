@@ -26,10 +26,12 @@ withDefaults(defineProps<Props>(), {
     <a
       v-if="icp"
       :href="icpLink || 'javascript:void(0)'"
-      class="hover:text-primary-hover mx-1"
+      class="hover:text-primary-hover mx-1 inline-flex items-center"
       target="_blank"
     >
+      <img src="./gongan.png" class="mr-1 h-4 w-auto align-middle" />
       {{ icp }}
+      |
     </a>
 
     <!-- Copyright Text -->
@@ -42,7 +44,7 @@ withDefaults(defineProps<Props>(), {
       class="hover:text-primary-hover mx-1"
       target="_blank"
     >
-      {{ companyName }}
+      | {{ companyName }}
     </a>
   </div>
 </template>

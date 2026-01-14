@@ -1,0 +1,16 @@
+{
+  "title2": { "table": "站内通知" },
+  "id": "ID",
+  "taskId": "消息任务",
+  "title": "标题",
+  "content": "发送内容",
+  "msgCategory": "消息分类",
+  "author": "发布人",
+  "url": "跳转地址",
+  "createdBy": "创建人ID",
+  "createdAt": "创建时间",
+  "updatedBy": "最后修改人",
+  "updatedAt": "最后修改时间",
+  "read": " 是否已读",
+  "readTime": "已读时间"
+}

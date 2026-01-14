@@ -14,6 +14,8 @@ interface Props {
    * @zh_CN loading状态开启
    */
   spinning?: boolean;
+  /* 文案 */
+  text?: string;
 }
 
 defineOptions({
@@ -77,6 +79,7 @@ function onTransitionEnd() {
       v-if="renderSpinner"
       class="loader relative size-12 before:absolute before:left-0 before:top-[60px] before:h-[5px] before:w-12 before:rounded-[50%] before:bg-primary/50 before:content-[''] after:absolute after:left-0 after:top-0 after:h-full after:w-full after:rounded after:bg-primary after:content-['']"
     ></div>
+    <div v-if="text" class="ml-4 mt-4 text-xs">{{ text }}</div>
   </div>
 </template>
 

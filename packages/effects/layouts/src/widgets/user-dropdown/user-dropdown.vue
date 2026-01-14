@@ -47,9 +47,10 @@ interface Props {
    * 菜单数组
    */
   menus?: Array<{
-    handler: AnyFunction;
+    handler?: AnyFunction;
     icon?: Component | Function | string;
-    text: string;
+    separator?: boolean;
+    text?: string;
   }>;
 
   /**
@@ -82,7 +83,7 @@ const props = withDefaults(defineProps<Props>(), {
   hoverDelay: 500,
 });
 
-const emit = defineEmits<{ logout: [] }>();
+const emit = defineEmits<{ logout: []; logoutPlay: []; signout: [] }>();
 
 const { globalLockScreenShortcutKey, globalLogoutShortcutKey } =
   usePreferences();
@@ -93,6 +94,18 @@ const [LockModal, lockModalApi] = useVbenModal({
 const [LogoutModal, logoutModalApi] = useVbenModal({
   onConfirm() {
     handleSubmitLogout();
+  },
+});
+const [SignoutModal, signoutModalApi] = useVbenModal({
+  onConfirm() {
+    handleSubmitSignout();
+  },
+});
+
+const [LogoutPlayModal, logoutPlayModalApi] = useVbenModal({
+  onConfirm() {
+    emit('logoutPlay');
+    logoutPlayModalApi.close();
   },
 });
 
@@ -131,6 +144,9 @@ const enableShortcutKey = computed(() => {
   return props.enableShortcutKey && preferences.shortcutKeys.enable;
 });
 
+const isPlayer = computed<boolean>(() => {
+  return accessStore.$state.isPlayer;
+});
 function handleOpenLock() {
   lockModalApi.open();
 }
@@ -145,10 +161,24 @@ function handleLogout() {
   logoutModalApi.open();
   openPopover.value = false;
 }
+function handleSignout() {
+  // emit
+  signoutModalApi.open();
+  openPopover.value = false;
+}
+
+function handleLogoutPlay() {
+  logoutPlayModalApi.open();
+  openPopover.value = false;
+}
 
 function handleSubmitLogout() {
   emit('logout');
   logoutModalApi.close();
+}
+function handleSubmitSignout() {
+  emit('signout');
+  signoutModalApi.close();
 }
 
 if (enableShortcutKey.value) {
@@ -187,6 +217,31 @@ if (enableShortcutKey.value) {
   >
     {{ $t('ui.widgets.logoutTip') }}
   </LogoutModal>
+  <LogoutPlayModal
+    :cancel-text="$t('common.cancel')"
+    :confirm-text="$t('common.confirm')"
+    :fullscreen-button="false"
+    :title="$t('common.prompt')"
+    centered
+    content-class="px-8 min-h-10"
+    footer-class="border-none mb-4 mr-4"
+    header-class="border-none"
+  >
+    是否退出扮演？
+  </LogoutPlayModal>
+
+  <SignoutModal
+    :cancel-text="$t('common.cancel')"
+    :confirm-text="$t('common.confirm')"
+    :fullscreen-button="false"
+    :title="$t('common.prompt')"
+    centered
+    content-class="px-8 min-h-10"
+    footer-class="border-none mb-3 mr-3"
+    header-class="border-none"
+  >
+    {{ $t('ui.widgets.signoutTip') }}
+  </SignoutModal>
 
   <DropdownMenu v-model:open="openPopover">
     <DropdownMenuTrigger ref="refTrigger" :disabled="props.trigger === 'hover'">
@@ -246,6 +301,24 @@ if (enableShortcutKey.value) {
           </DropdownMenuShortcut>
         </DropdownMenuItem>
         <DropdownMenuSeparator v-if="preferences.widget.lockScreen" />
+        <DropdownMenuItem
+          v-if="isPlayer"
+          class="mx-1 flex cursor-pointer items-center rounded-sm py-1 leading-8"
+          @click="handleLogoutPlay"
+        >
+          <LogOut class="mr-2 size-4" />
+          退出扮演
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          class="mx-1 flex cursor-pointer items-center rounded-sm py-1 leading-8"
+          @click="handleSignout"
+        >
+          <LogOut class="mr-2 size-4" />
+          {{ $t('common.signout') }}
+          <DropdownMenuShortcut v-if="enableLogoutShortcutKey">
+            {{ altView }} W
+          </DropdownMenuShortcut>
+        </DropdownMenuItem>
         <DropdownMenuItem
           class="mx-1 flex cursor-pointer items-center rounded-sm py-1 leading-8"
           @click="handleLogout"

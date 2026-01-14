@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
+import { LOGIN_PATH } from '@vben/constants';
 import { $t } from '@vben/locales';
 
 import { VbenButton } from '@vben-core/shadcn-ui';
@@ -35,10 +36,6 @@ interface Props {
    * @zh_CN 描述
    */
   description?: string;
-  /**
-   * @zh_CN 是否显示返回按钮
-   */
-  showBack?: boolean;
 }
 
 defineOptions({
@@ -49,7 +46,7 @@ const props = withDefaults(defineProps<Props>(), {
   description: '',
   loading: false,
   showBack: true,
-  loginPath: '/auth/login',
+  loginPath: LOGIN_PATH,
   submitButtonText: '',
   subTitle: '',
   title: '',

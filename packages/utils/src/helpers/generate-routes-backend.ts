@@ -1,4 +1,4 @@
-import type { RouteRecordRaw } from 'vue-router';
+import type { RouteMeta, RouteRecordRaw } from 'vue-router';
 
 import type {
   ComponentRecordType,
@@ -6,7 +6,7 @@ import type {
   RouteRecordStringComponent,
 } from '@vben-core/typings';
 
-import { mapTree } from '@vben-core/shared/utils';
+import { cloneDeep, mapTree } from '@vben-core/shared/utils';
 
 /**
  * 动态生成路由 - 后端方式
@@ -33,7 +33,7 @@ async function generateRoutesByBackend(
     return routes;
   } catch (error) {
     console.error(error);
-    throw error;
+    return [];
   }
 }
 
@@ -42,6 +42,61 @@ function convertRoutes(
   layoutMap: ComponentRecordType,
   pageMap: ComponentRecordType,
 ): RouteRecordRaw[] {
+  const routeList = routes.map((route) => {
+    const { component, name } = route;
+    let newRoute = {} as RouteRecordRaw;
+
+    if (!name) {
+      console.error(
+        '路由的name属性为空，请在菜单管理中正确配置name字段',
+        route,
+      );
+    }
+
+    if (component) {
+      newRoute = cloneDeep(route) as unknown as RouteRecordRaw;
+      // 处理1级菜单是目录的情况
+      if (component.toUpperCase() === 'LAYOUT') {
+        newRoute.component = layoutMap[component.toUpperCase()];
+      } else {
+        // 处理1级菜单是菜单的情况（1级菜单就是菜单时，需要新增一个隐藏的子级）
+        const childrenPath = route.path;
+        const children = cloneDeep(route) as unknown as RouteRecordRaw;
+        children.path = `${childrenPath}/child`;
+        // if (children.openWith === '30') {
+        //   children.component = 'IFrameView';
+        // }
+
+        newRoute.children = [children];
+        newRoute.component = layoutMap.LAYOUT;
+        newRoute.name = `${String(route.name)}Parent`;
+        newRoute.path = childrenPath;
+        newRoute.redirect = children.path;
+        const meta = (route.meta || {}) as RouteMeta;
+        meta.single = true;
+        meta.affix = false;
+        meta.hideChildrenInMenu = true;
+        newRoute.meta = meta;
+      }
+    } else {
+      console.warn(`请正确配置路由：${String(route?.name)}的component属性`);
+    }
+    newRoute.children &&
+      asyncImportRoute(
+        newRoute.children as unknown as RouteRecordStringComponent[],
+        layoutMap,
+        pageMap,
+      );
+    return newRoute;
+  });
+  return routeList;
+}
+
+function asyncImportRoute(
+  routes: RouteRecordStringComponent[],
+  layoutMap: ComponentRecordType,
+  pageMap: ComponentRecordType,
+) {
   return mapTree(routes, (node) => {
     const route = node as unknown as RouteRecordRaw;
     const { component, name } = node;
@@ -50,20 +105,20 @@ function convertRoutes(
       console.error('route name is required', route);
     }
 
-    // layout转换
-    if (component && layoutMap[component]) {
-      route.component = layoutMap[component];
-      // 页面组件转换
-    } else if (component) {
-      const normalizePath = normalizeViewPath(component);
-      const pageKey = normalizePath.endsWith('.vue')
-        ? normalizePath
-        : `${normalizePath}.vue`;
-      if (pageMap[pageKey]) {
+    if (route.meta?.iframeSrc || route.meta?.link) {
+      route.component = layoutMap.IFRAME;
+    } else {
+      // layout转换
+      // if (component && layoutMap[component]) {
+      //   route.component = layoutMap[component];
+      //   // 页面组件转换
+      // } else
+      if (component) {
+        const normalizePath = normalizeViewPath(component);
+        const pageKey = normalizePath.endsWith('.vue')
+          ? normalizePath
+          : `${normalizePath}.vue`;
         route.component = pageMap[pageKey];
-      } else {
-        console.error(`route component is invalid: ${pageKey}`, route);
-        route.component = pageMap['/_core/fallback/not-found.vue'];
       }
     }
 

@@ -18,9 +18,6 @@ import { $t } from '@vben/locales';
 
 import { isBoolean } from '@vben-core/shared/utils';
 
-// @ts-ignore
-import JsonBigint from 'json-bigint';
-
 defineOptions({ name: 'JsonViewer' });
 
 const props = withDefaults(defineProps<JsonViewerProps>(), {
@@ -74,7 +71,7 @@ const jsonData = computed<Record<string, any>>(() => {
   }
 
   try {
-    return JsonBigint({ storeAsString: true }).parse(props.value);
+    return JSON.parse(props.value);
   } catch (error) {
     console.error('JSON parse error:', error);
     return {};

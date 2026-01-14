@@ -74,8 +74,7 @@
     padding: 10px;
 
     &.boxed:not(.open) {
-      padding-bottom: 20px;
-      margin-bottom: 10px;
+      // padding-bottom: 0;
     }
 
     &.open {

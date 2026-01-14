@@ -1,4 +1,4 @@
-import type { AxiosInstance, AxiosResponse } from 'axios';
+import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import type { RequestClientConfig, RequestClientOptions } from './types';
 
@@ -146,14 +146,21 @@ class RequestClient {
     url: string,
     config: RequestClientConfig,
   ): Promise<T> {
+    const response: AxiosResponse<T> = await this.instance({
+      url,
+      ...config,
+      ...(config.paramsSerializer
+        ? { paramsSerializer: getParamsSerializer(config.paramsSerializer) }
+        : {}),
+    });
+    return response as T;
+  }
+  /**
+   * 通用的请求方法
+   */
+  public async request2<T>(config: AxiosRequestConfig): Promise<T> {
     try {
-      const response: AxiosResponse<T> = await this.instance({
-        url,
-        ...config,
-        ...(config.paramsSerializer
-          ? { paramsSerializer: getParamsSerializer(config.paramsSerializer) }
-          : {}),
-      });
+      const response: AxiosResponse<T> = await this.instance(config);
       return response as T;
     } catch (error: any) {
       throw error.response ? error.response.data : error;

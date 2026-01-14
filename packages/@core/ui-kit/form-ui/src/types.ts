@@ -1,10 +1,14 @@
 import type { FieldOptions, FormContext, GenericObject } from 'vee-validate';
 import type { ZodTypeAny } from 'zod';
 
-import type { Component, HtmlHTMLAttributes, Ref } from 'vue';
+import type { Component, HtmlHTMLAttributes, Ref, VNode } from 'vue';
 
 import type { VbenButtonProps } from '@vben-core/shadcn-ui';
-import type { ClassType, MaybeComputedRef } from '@vben-core/typings';
+import type {
+  ClassType,
+  MaybeComputedRef,
+  Recordable,
+} from '@vben-core/typings';
 
 import type { FormApi } from './form-api';
 
@@ -66,6 +70,27 @@ export type MaybeComponentProps = { [K in MaybeComponentPropKey]?: any };
 export type FormActions = FormContext<GenericObject>;
 
 export type CustomRenderType = (() => Component | string) | string;
+export type DetailType = {
+  /**
+   * 详情页面是否显示复制按钮
+   */
+  copy?: boolean;
+  /**
+   * 是否详情字段（删除dom）
+   * @returns 是否渲染
+   */
+  enabled?: boolean | FormItemDetailCondition;
+  /**
+   * 详情页面label
+   */
+  label?: string;
+  render?: (
+    val: any,
+    data: Recordable,
+  ) => Element | number | string | undefined | VNode;
+  /** 详情span */
+  span?: number;
+};
 
 export type FormSchemaRuleType =
   | 'required'
@@ -77,6 +102,11 @@ export type FormSchemaRuleType =
 type FormItemDependenciesCondition<T = boolean | PromiseLike<boolean>> = (
   value: Partial<Record<string, any>>,
   actions: FormActions,
+) => T;
+
+type FormItemDetailCondition<T = boolean> = (
+  values: Partial<Record<string, any>>,
+  schema: FormSchema<BaseFormComponentType>,
 ) => T;
 
 type FormItemDependenciesConditionWithRules = (
@@ -251,6 +281,7 @@ export interface FormSchema<
   dependencies?: FormItemDependencies;
   /** 描述 */
   description?: CustomRenderType;
+  detail?: DetailType;
   /** 字段名 */
   fieldName: string;
   /** 帮助信息 */
@@ -350,9 +381,9 @@ export interface ActionButtonOptions extends VbenButtonProps {
 export interface VbenFormProps<
   T extends BaseFormComponentType = BaseFormComponentType,
 > extends Omit<
-  FormRenderProps<T>,
-  'componentBindEventMap' | 'componentMap' | 'form'
-> {
+    FormRenderProps<T>,
+    'componentBindEventMap' | 'componentMap' | 'form'
+  > {
   /**
    * 操作按钮是否反转（提交按钮前置）
    */

@@ -1,0 +1,16 @@
+{
+  "title2": { "table": "Notice" },
+  "id": "id",
+  "taskId": "taskId",
+  "title": "title",
+  "content": "content",
+  "msgCategory": "msgCategory",
+  "author": "author",
+  "url": "url",
+  "createdBy": "createdBy",
+  "createdAt": "createdAt",
+  "updatedBy": "updatedBy",
+  "updatedAt": "updatedAt",
+  "read": "read",
+  "readTime": "readTime"
+}

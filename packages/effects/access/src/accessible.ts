@@ -1,32 +1,22 @@
 import type { Component, DefineComponent } from 'vue';
 
-import type {
-  AccessModeType,
-  GenerateMenuAndRoutesOptions,
-  RouteRecordRaw,
-} from '@vben/types';
+import type { GenerateMenuAndRoutesOptions } from '@vben/types';
 
 import { defineComponent, h } from 'vue';
 
 import {
-  cloneDeep,
   generateMenus,
   generateRoutesByBackend,
-  generateRoutesByFrontend,
   isFunction,
   isString,
   mapTree,
 } from '@vben/utils';
 
-async function generateAccessible(
-  mode: AccessModeType,
-  options: GenerateMenuAndRoutesOptions,
-) {
+async function generateAccessible(options: GenerateMenuAndRoutesOptions) {
   const { router } = options;
 
-  options.routes = cloneDeep(options.routes);
   // 生成路由
-  const accessibleRoutes = await generateRoutes(mode, options);
+  const accessibleRoutes = await generateRoutes(options);
 
   const root = router.getRoutes().find((item) => item.path === '/');
 
@@ -66,46 +56,21 @@ async function generateAccessible(
   }
 
   // 生成菜单
-  const accessibleMenus = generateMenus(accessibleRoutes, options.router);
+  const accessibleMenus = await generateMenus(accessibleRoutes, options.router);
 
   return { accessibleMenus, accessibleRoutes };
 }
 
 /**
  * Generate routes
- * @param mode
- * @param options
+ * @param options 参数
  */
-async function generateRoutes(
-  mode: AccessModeType,
-  options: GenerateMenuAndRoutesOptions,
-) {
-  const { forbiddenComponent, roles, routes } = options;
+async function generateRoutes(options: GenerateMenuAndRoutesOptions) {
+  const { beforeRoutes = [], afterRoutes = [] } = options;
 
-  let resultRoutes: RouteRecordRaw[] = routes;
-  switch (mode) {
-    case 'backend': {
-      resultRoutes = await generateRoutesByBackend(options);
-      break;
-    }
-    case 'frontend': {
-      resultRoutes = await generateRoutesByFrontend(
-        routes,
-        roles || [],
-        forbiddenComponent,
-      );
-      break;
-    }
-    case 'mixed': {
-      const [frontend_resultRoutes, backend_resultRoutes] = await Promise.all([
-        generateRoutesByFrontend(routes, roles || [], forbiddenComponent),
-        generateRoutesByBackend(options),
-      ]);
+  let resultRoutes = await generateRoutesByBackend(options);
 
-      resultRoutes = [...frontend_resultRoutes, ...backend_resultRoutes];
-      break;
-    }
-  }
+  resultRoutes = [...beforeRoutes, ...resultRoutes, ...afterRoutes];
 
   /**
    * 调整路由树，做以下处理：

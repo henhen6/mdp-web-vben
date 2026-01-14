@@ -6,6 +6,8 @@ import { isFunction } from '@vben/utils';
 
 import axios from 'axios';
 
+import { ResultCodeEnum } from './types';
+
 export const defaultResponseInterceptor = ({
   codeField = 'code',
   dataField = 'data',
@@ -59,11 +61,32 @@ export const authenticateResponseInterceptor = ({
 }): ResponseInterceptorConfig => {
   return {
     rejected: async (error) => {
-      const { config, response } = error;
-      // 如果不是 401 错误，直接抛出异常
-      if (response?.status !== 401) {
+      const { config, data, response } = error;
+      const code = response?.data?.code ?? data?.code;
+
+      // 被T，被顶 都强制重新登录
+      if (
+        [
+          ResultCodeEnum.CODE_11014,
+          ResultCodeEnum.CODE_11015,
+          ResultCodeEnum.CODE_11074,
+        ].includes(code)
+      ) {
+        await doReAuthenticate();
         throw error;
       }
+
+      // token 自然过期，或者没有传递token，才可以刷新token
+      if (
+        ![
+          ResultCodeEnum.CODE_11012,
+          ResultCodeEnum.CODE_11013,
+          ResultCodeEnum.CODE_11073,
+        ].includes(code)
+      ) {
+        throw error;
+      }
+
       // 判断是否启用了 refreshToken 功能
       // 如果没有启用或者已经是重试请求了，直接跳转到重新登录
       if (!enableRefreshToken || config.__isRetryRequest) {

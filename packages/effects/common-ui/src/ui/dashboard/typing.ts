@@ -19,10 +19,10 @@ interface WorkbenchProjectItem {
 }
 
 interface WorkbenchTrendItem {
-  avatar: string;
-  content: string;
+  percent: number;
+  desc: string;
   date: string;
-  title: string;
+  name: string;
 }
 
 interface WorkbenchTodoItem {

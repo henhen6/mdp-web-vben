@@ -1,21 +1,28 @@
 {
   "formRules": {
     "required": "Please enter {0}",
+    "fieldRequired": "This field is required",
     "selectRequired": "Please select {0}",
+    "typeError": "Invalid data type",
     "minLength": "{0} must be at least {1} characters",
     "maxLength": "{0} can be at most {1} characters",
     "length": "{0} must be {1} characters long",
     "alreadyExists": "{0} `{1}` already exists",
     "startWith": "{0} must start with `{1}`",
-    "invalidURL": "Please input a valid URL",
-    "sizeLimit": "The file size cannot exceed {0}MB",
-    "previewWarning": "Unable to open the file, there is no available URL or preview address"
+    "invalidURL": "Please input a valid URL"
   },
   "actionTitle": {
+    "operation": "Action Bar",
+    "batchOperation": "Batch Operation",
+    "moreOperation": "More Operation",
     "edit": "Modify {0}",
     "create": "Create {0}",
     "delete": "Delete {0}",
-    "view": "View {0}"
+    "view": "View {0}",
+    "mark": "Mark as Read",
+    "append": "Append {0}",
+    "expandAll": "Expand All",
+    "collapseAll": "Collapse All"
   },
   "actionMessage": {
     "deleteConfirm": "Are you sure to delete {0}?",
@@ -26,8 +33,7 @@
   },
   "placeholder": {
     "input": "Please enter",
-    "select": "Please select",
-    "upload": "Click to upload"
+    "select": "Please select"
   },
   "captcha": {
     "title": "Please complete the security verification",
@@ -80,6 +86,7 @@
     "qa": "Q&A",
     "setting": "Settings",
     "logoutTip": "Do you want to logout?",
+    "signoutTip": "Do you want to Signout?",
     "viewAll": "View All Messages",
     "notifications": "Notifications",
     "markAllAsRead": "Make All as Read",
@@ -110,5 +117,49 @@
       "setTimezone": "Set Timezone",
       "setSuccess": "Timezone set successfully"
     }
+  },
+  "tree": {
+    "selectAll": "Select All",
+    "unSelectAll": "Cancel Select",
+    "expandAll": "Expand All",
+    "unExpandAll": "Collapse all",
+    "checkStrictly": "Hierarchical association",
+    "checkUnStrictly": "Hierarchical independence"
+  },
+  "upload": {
+    "save": "Save",
+    "upload": "Upload",
+    "imgUpload": "ImageUpload",
+    "uploaded": "Uploaded",
+    "operating": "Operating",
+    "del": "Delete",
+    "download": "download",
+    "saveWarn": "Please wait for the file to upload and save!",
+    "saveError": "There is no file successfully uploaded and cannot be saved!",
+    "preview": "Preview",
+    "choose": "Select the file",
+    "accept": "Support {0} format",
+    "acceptUpload": "Only upload files in {0} format",
+    "maxSize": "A single file does not exceed {0}MB ",
+    "maxSizeMultiple": "Only upload files up to {0}MB!",
+    "maxNumber": "Only upload up to {0} files",
+    "legend": "Legend",
+    "fileName": "File name",
+    "fileSize": "File size",
+    "fileStatue": "File status",
+    "pending": "Pending",
+    "startUpload": "Start upload",
+    "uploadSuccess": "Upload successfully",
+    "uploadError": "Upload failed",
+    "uploading": "Uploading",
+    "uploadWait": "Please wait for the file upload to finish",
+    "reUploadFailed": "Re-upload failed files",
+    "uploadHelpMessage": "Please upload a file in {ext} format that does not exceed {size} .",
+    "unknownFileType": "Unknown file type, unable to upload",
+    "confirmDelete": "Confirm file deletion {0}?",
+    "clickOrDrag": "Click or drag file to this area to upload"
+  },
+  "profile": {
+    "title": "Profile"
   }
 }

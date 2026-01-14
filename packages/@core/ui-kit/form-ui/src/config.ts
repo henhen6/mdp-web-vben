@@ -12,6 +12,7 @@ import {
   VbenButton,
   VbenCheckbox,
   Input as VbenInput,
+  VbenInputCaptcha,
   VbenInputPassword,
   VbenPinInput,
   VbenSelect,
@@ -31,6 +32,7 @@ export const COMPONENT_MAP: Record<BaseFormComponentType, Component> = {
   VbenInput,
   VbenInputPassword,
   VbenPinInput,
+  VbenInputCaptcha,
   VbenSelect,
 };
 

@@ -1,0 +1,16 @@
+{
+  "title": { "table": "Position" },
+  "id": "id",
+  "orgId": "orgId",
+  "name": "name",
+  "state": "state",
+  "remarks": "remarks",
+  "createdAt": "createdAt",
+  "createdBy": "createdBy",
+  "updatedAt": "updatedAt",
+  "updatedBy": "updatedBy",
+  "tips": {
+    "stateConfirm": "Do you want to switch the status of {name}?",
+    "successTip": "Operation successful"
+  }
+}

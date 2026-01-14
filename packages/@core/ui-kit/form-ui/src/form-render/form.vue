@@ -100,7 +100,7 @@ const computedSchema = computed(
     formFieldProps: Record<string, any>;
   })[] => {
     const {
-      colon = false,
+      colon = true,
       componentProps = {},
       controlClass = '',
       disabled,

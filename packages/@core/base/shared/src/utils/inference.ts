@@ -149,6 +149,26 @@ function getFirstNonNullOrUndefined<T>(
   return undefined;
 }
 
+export function isDef<T = unknown>(val?: T): val is T {
+  return val !== undefined;
+}
+
+export function isNull(val: unknown): val is null {
+  return val === null;
+}
+
+export function isUnDef<T = unknown>(val?: T): val is T {
+  return !isDef(val);
+}
+
+export function isNullOrUnDef(val: unknown): val is null | undefined {
+  return isUnDef(val) || isNull(val);
+}
+
+export function isEmptyOrUnDef(val: unknown): val is null | undefined {
+  return isUnDef(val) || isNull(val) || isEmpty(val);
+}
+
 export {
   getFirstNonNullOrUndefined,
   isBoolean,

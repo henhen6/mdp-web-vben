@@ -30,6 +30,8 @@ interface Props {
   params?: Record<string, any>;
   /** 从api返回的结果中提取options数组的字段名 */
   resultField?: string;
+  // value值数据类型  [1-字符串 2-整型 3-布尔 undefined-原始类型]
+  dataType?: '1' | '2' | '3' | undefined;
   /** label字段名 */
   labelField?: string;
   /** children字段名，需要层级数据的组件可用 */
@@ -77,6 +79,7 @@ defineOptions({ name: 'ApiComponent', inheritAttrs: false });
 const props = withDefaults(defineProps<Props>(), {
   labelField: 'label',
   valueField: 'value',
+  dataType: undefined,
   disabledField: 'disabled',
   childrenField: '',
   optionsPropName: 'options',
@@ -111,24 +114,42 @@ const isFirstLoaded = ref(false);
 const hasPendingRequest = ref(false);
 
 const getOptions = computed(() => {
-  const {
-    labelField,
-    valueField,
-    disabledField,
-    childrenField,
-    numberToString,
-  } = props;
+  const { dataType, labelField, valueField, childrenField, disabledField } =
+    props;
 
   const refOptionsData = unref(refOptions);
 
   function transformData(data: OptionsItem[]): OptionsItem[] {
     return data.map((item) => {
-      const value = get(item, valueField);
+      let value = get(item, valueField);
       const disabled = get(item, disabledField);
+
+      switch (dataType) {
+        case '1': {
+          value = String(value);
+
+          break;
+        }
+        case '2': {
+          try {
+            value = Number(value);
+          } catch (error) {
+            console.error(error);
+          }
+
+          break;
+        }
+        case '3': {
+          value = ['1', 1, true, 'true'].includes(value);
+
+          break;
+        }
+        // No default
+      }
       return {
         ...objectOmit(item, [labelField, valueField, disabled, childrenField]),
         label: get(item, labelField),
-        value: numberToString ? `${value}` : value,
+        value,
         disabled: get(item, disabledField),
         ...(childrenField && item[childrenField]
           ? { children: transformData(item[childrenField]) }
@@ -143,7 +164,7 @@ const getOptions = computed(() => {
 });
 
 const bindProps = computed(() => {
-  return {
+  const row = {
     [props.modelPropName]: unref(modelValue),
     [props.optionsPropName]: unref(getOptions),
     [`onUpdate:${props.modelPropName}`]: (val: string) => {
@@ -156,6 +177,7 @@ const bindProps = computed(() => {
         }
       : {}),
   };
+  return row;
 });
 
 async function fetchApi() {
@@ -269,14 +291,39 @@ function emitChange() {
   emit('optionsChange', unref(getOptions));
 }
 const componentRef = ref();
+/**
+ * 暴露给父组件的方法集合
+ * 父组件可以通过ref引用调用这些方法
+ */
 defineExpose({
-  /** 获取options数据 */
+  /**
+   * 重新加载API数据
+   * 父组件调用方式: apiComponentRef.value.fetchApi()
+   */
+  fetchApi,
+  /**
+   * 获取当前的选项数据
+   * 父组件调用方式: const options = apiComponentRef.value.getOptions()
+   * @returns {OptionsItem[]} 处理后的选项数据数组
+   */
   getOptions: () => unref(getOptions),
-  /** 获取当前值 */
+  /**
+   * 获取当前选中的值
+   * 父组件调用方式: const value = apiComponentRef.value.getValue()
+   * @returns {any} 当前选中的值
+   */
   getValue: () => unref(modelValue),
-  /** 获取被包装的组件实例 */
+  /**
+   * 获取被包装的组件实例
+   * 父组件调用方式: const wrappedComponent = apiComponentRef.value.getComponentRef<Select>()
+   * @returns {T} 被包装组件的实例
+   */
   getComponentRef: <T = any,>() => componentRef.value as T,
-  /** 更新Api参数 */
+  /**
+   * 更新API请求参数
+   * 父组件调用方式: apiComponentRef.value.updateParam({ key: value })
+   * @param {Record<string, any>} newParams - 新的请求参数
+   */
   updateParam(newParams: Record<string, any>) {
     innerParams.value = newParams;
   },

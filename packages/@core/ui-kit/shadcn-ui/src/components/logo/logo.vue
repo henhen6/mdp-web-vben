@@ -16,10 +16,12 @@ interface Props {
    * @zh_CN Logo 跳转地址
    */
   href?: string;
+  logoHeight?: number | string;
   /**
    * @zh_CN Logo 图片大小
    */
   logoSize?: number;
+  logoWidth?: number | string;
   /**
    * @zh_CN Logo 图标
    */
@@ -77,6 +79,8 @@ const logoSrc = computed(() => {
         :alt="text"
         :src="logoSrc"
         :size="logoSize"
+        :width="logoWidth"
+        :height="logoHeight"
         :fit="fit"
         class="relative rounded-none bg-transparent"
       />

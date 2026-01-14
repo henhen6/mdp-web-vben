@@ -1,3 +1,4 @@
+export * from './use-device';
 export * from './use-is-mobile';
 export * from './use-layout-style';
 export * from './use-namespace';

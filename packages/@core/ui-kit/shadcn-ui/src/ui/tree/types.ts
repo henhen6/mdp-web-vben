@@ -31,6 +31,8 @@ export interface TreeProps {
   labelField?: string;
   /** 是否多选 */
   multiple?: boolean;
+  /** 显示全选 */
+  showCheckAll?: boolean;
   /** 显示由iconField指定的图标 */
   showIcon?: boolean;
   /** 启用展开收缩动画 */
@@ -54,6 +56,7 @@ export function treePropsDefaults() {
     iconField: 'icon',
     labelField: 'label',
     multiple: false,
+    showCheckAll: false,
     showIcon: true,
     transition: true,
     valueField: 'value',

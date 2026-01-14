@@ -13,6 +13,8 @@ import { createI18n } from 'vue-i18n';
 
 import { useSimpleLocale } from '@vben-core/composables';
 
+import { merge } from '../../@core/base/shared/src/utils/merge';
+
 const i18n = createI18n({
   globalInjection: true,
   legacy: false,
@@ -79,14 +81,56 @@ function loadLocalesMapFromDir(
   for (const [locale, files] of Object.entries(localesRaw)) {
     localesMap[locale] = async () => {
       const messages: Record<string, any> = {};
+      const list = [];
       for (const [fileName, importFn] of Object.entries(files)) {
-        messages[fileName] = ((await importFn()) as any)?.default;
+        if (fileName.includes('/')) {
+          const value = ((await importFn()) as any)?.default;
+          const json = convertStrToObjRecursive(fileName.split('/'), value);
+
+          // messages = {
+          //   ...messages,
+          //   ...json,
+          // };
+          list.push(json);
+        } else {
+          messages[fileName] = ((await importFn()) as any)?.default;
+        }
       }
-      return { default: messages };
+
+      const msgs = merge(messages, ...list);
+
+      return { default: msgs };
     };
   }
 
   return localesMap;
+}
+
+function setNestedProperty(
+  obj: { [key: string]: any },
+  keys: string[],
+  value: any,
+): any {
+  if (keys.length === 0) {
+    throw new Error('Keys array should not be empty');
+  }
+
+  const key = keys[0] as string;
+  if (keys.length === 1) {
+    obj[key] = value;
+  } else {
+    if (!obj[key]) {
+      obj[key] = {};
+    }
+    setNestedProperty(obj[key], keys.slice(1), value);
+  }
+
+  return obj;
+}
+
+function convertStrToObjRecursive(keys: string[], value: any): any {
+  const result = {};
+  return setNestedProperty(result, keys, value);
 }
 
 /**

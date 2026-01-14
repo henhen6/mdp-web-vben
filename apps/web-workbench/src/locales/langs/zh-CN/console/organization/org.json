@@ -1,0 +1,32 @@
+{
+  "title": { "table": "组织" },
+  "id": "ID",
+  "name": "名称",
+  "orgType": "类型",
+  "shortName": "简称",
+  "parentId": "父组织",
+  "treePath": "树路径",
+  "weight": "排序",
+  "state": "状态",
+  "remarks": "备注",
+  "createdAt": "创建时间",
+  "createdBy": "创建人",
+  "updatedAt": "修改时间",
+  "updatedBy": "修改人",
+  "deletedBy": "删除人",
+  "deletedAt": "删除标识",
+  "tips": {
+    "noDataSelected": "未选中任何数据",
+    "deleteConfirm": "选中节点及其子结点将被永久删除, 是否确定删除？",
+    "treeLoadFailed": "树结构加载失败,请刷新页面",
+    "selectNodeToMove": "请选择需要移动的节点",
+    "noNodeSelected": "尚未选择任何节点",
+    "confirmMoveToRoot": "确定要将【{currentName}】移动到【根节点】吗？",
+    "confirmMoveToChild": "确定要将【{currentName}】移动成为【{parentName}】的子节点吗？",
+    "moveSuccess": "移动成功",
+    "cannotMoveToParent": "不能移动到他的父节点",
+    "cannotMoveToSelf": "不能移动成为自己的子节点",
+    "cannotMoveToDescendant": "不能移动到他的子孙节点",
+    "companyCannotMoveToDept": "公司不能移动到部门下"
+  }
+}

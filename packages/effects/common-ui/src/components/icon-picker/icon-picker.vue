@@ -71,9 +71,16 @@ const modelValue = defineModel({ default: '', type: String });
 
 const visible = ref(false);
 const currentSelect = ref('');
+const currentPage = ref(1);
 const keyword = ref('');
 const keywordDebounce = refDebounced(keyword, 300);
 const innerIcons = ref<string[]>([]);
+
+/* 当检索关键词变化时，重置分页 */
+watch(keywordDebounce, () => {
+  currentPage.value = 1;
+  setCurrentPage(1);
+});
 
 watchDebounced(
   () => props.prefix,
@@ -115,7 +122,7 @@ const showList = computed(() => {
   );
 });
 
-const { paginationList, total, setCurrentPage, currentPage } = usePagination(
+const { paginationList, total, setCurrentPage } = usePagination(
   showList,
   props.pageSize,
 );
@@ -138,6 +145,7 @@ const handleClick = (icon: string) => {
 };
 
 const handlePageChange = (page: number) => {
+  currentPage.value = page;
   setCurrentPage(page);
 };
 

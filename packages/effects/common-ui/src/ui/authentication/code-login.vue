@@ -6,6 +6,7 @@ import type { VbenFormSchema } from '@vben-core/form-ui';
 import { computed, reactive } from 'vue';
 import { useRouter } from 'vue-router';
 
+import { LOGIN_PATH } from '@vben/constants';
 import { $t } from '@vben/locales';
 
 import { useVbenForm } from '@vben-core/form-ui';
@@ -48,7 +49,7 @@ defineOptions({
 const props = withDefaults(defineProps<Props>(), {
   loading: false,
   showBack: true,
-  loginPath: '/auth/login',
+  loginPath: LOGIN_PATH,
   submitButtonText: '',
   subTitle: '',
   title: '',
@@ -85,6 +86,7 @@ function goToLogin() {
 
 defineExpose({
   getFormApi: () => formApi,
+  goToLogin,
 });
 </script>
 

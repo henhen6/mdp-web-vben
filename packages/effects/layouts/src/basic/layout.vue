@@ -33,8 +33,12 @@ import {
   useMixedMenu,
 } from './menu';
 import { LayoutTabbar } from './tabbar';
-
+interface Props {
+  logoWidth?: number;
+  logoHeight?: number;
+}
 defineOptions({ name: 'BasicLayout' });
+const props = defineProps<Props>();
 
 const emit = defineEmits<{ clearPreferencesAndLogout: []; clickLogo: [] }>();
 
@@ -206,6 +210,10 @@ const slots: SetupContext['slots'] = useSlots();
 const headerSlots = computed(() => {
   return Object.keys(slots).filter((key) => key.startsWith('header-'));
 });
+
+const logo = computed(
+  () => import.meta.env.VITE_BASE + preferences.logo.source,
+);
 </script>
 
 <template>
@@ -269,9 +277,11 @@ const headerSlots = computed(() => {
         :fit="preferences.logo.fit"
         :class="logoClass"
         :collapsed="logoCollapsed"
-        :src="preferences.logo.source"
+        :src="logo"
         :src-dark="preferences.logo.sourceDark"
         :text="preferences.app.name"
+        :logo-width="props.logoWidth"
+        :logo-height="props.logoHeight"
         :theme="showHeaderNav ? headerTheme : theme"
         @click="clickLogo"
       >
@@ -362,6 +372,8 @@ const headerSlots = computed(() => {
       <VbenLogo
         v-if="preferences.logo.enable"
         :fit="preferences.logo.fit"
+        :src="logo"
+        :src-dark="preferences.logo.sourceDark"
         :text="preferences.app.name"
         :theme="theme"
       >

@@ -119,9 +119,9 @@
   },
   "theme": {
     "title": "Theme",
-    "radius": "Radius",
     "fontSize": "Font Size",
-    "fontSizeTip": "Adjust global font size with real-time preview",
+    "fontSizeTip": "Adjust global font size, real-time preview effect",
+    "radius": "Radius",
     "light": "Light",
     "dark": "Dark",
     "darkSidebar": "Semi Dark Sidebar",

@@ -37,9 +37,12 @@ const is: {
 
 const useNamespace = (block: string) => {
   const namespace = DEFAULT_NAMESPACE;
+  // 拼接 -
   const b = (blockSuffix = '') => _bem(namespace, block, blockSuffix, '', '');
+  // 拼接 __
   const e = (element?: string) =>
     element ? _bem(namespace, block, '', element, '') : '';
+  // 拼接 --
   const m = (modifier?: string) =>
     modifier ? _bem(namespace, block, '', '', modifier) : '';
   const be = (blockSuffix?: string, element?: string) =>

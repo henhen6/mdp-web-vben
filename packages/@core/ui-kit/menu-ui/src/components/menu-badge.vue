@@ -14,7 +14,7 @@ interface Props extends MenuRecordBadgeRaw {
 const props = withDefaults(defineProps<Props>(), {});
 
 const variantsMap: Record<string, string> = {
-  default: 'bg-green-500',
+  default: 'bg-destructive',
   destructive: 'bg-destructive',
   primary: 'bg-primary',
   success: 'bg-green-500',

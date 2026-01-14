@@ -39,7 +39,7 @@ export class DrawerApi {
       class: '',
       closable: true,
       closeIconPlacement: 'right',
-      closeOnClickModal: true,
+      closeOnClickModal: false,
       closeOnPressEscape: true,
       confirmLoading: false,
       contentClass: '',

@@ -41,6 +41,8 @@ type AnyFunction<T extends any[] = any[], R = void> =
  */
 type Nullable<T> = null | T;
 
+type Undefinedable<T> = T | undefined;
+
 /**
  * T | Not null 包装
  */
@@ -49,7 +51,7 @@ type NonNullable<T> = T extends null | undefined ? never : T;
 /**
  * 字符串类型对象
  */
-type Recordable<T> = Record<string, T>;
+type Recordable<T = any> = Record<string, T>;
 
 /**
  * 字符串类型对象（只读）
@@ -111,13 +113,23 @@ type EmitType = (name: Name, ...args: any[]) => void;
 
 type MaybePromise<T> = Promise<T> | T;
 
+type TargetContext = '_blank' | '_self';
+
+type ElRef<T extends HTMLElement = HTMLDivElement> = Nullable<T>;
+
+declare interface Fn<T = any, R = T> {
+  (...arg: T[]): R;
+}
+
 export type {
   AnyFunction,
   AnyNormalFunction,
   AnyPromiseFunction,
   DeepPartial,
   DeepReadonly,
+  ElRef,
   EmitType,
+  Fn,
   IntervalHandle,
   MaybeComputedRef,
   MaybePromise,
@@ -128,5 +140,7 @@ export type {
   Nullable,
   ReadonlyRecordable,
   Recordable,
+  TargetContext,
   TimeoutHandle,
+  Undefinedable,
 };

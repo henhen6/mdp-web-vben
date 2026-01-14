@@ -6,33 +6,43 @@ import { usePreferences } from '@vben/preferences';
 
 import { useVbenForm } from '@vben-core/form-ui';
 
+import VxeUIPluginRenderAntd from '@vxe-ui/plugin-render-antd';
 import {
   VxeButton,
+  VxeButtonGroup,
   VxeCheckbox,
-
-  // VxeFormGather,
-  // VxeForm,
-  // VxeFormItem,
+  VxeCheckboxGroup,
+  VxeForm,
+  VxeFormGather,
+  VxeFormGroup,
+  VxeFormItem,
   VxeIcon,
   VxeInput,
+  VxeLink,
+  VxeList,
   VxeLoading,
   VxeModal,
   VxeNumberInput,
+  VxeOptgroup,
+  VxeOption,
   VxePager,
-  // VxeList,
-  // VxeModal,
-  // VxeOptgroup,
-  // VxeOption,
-  // VxePulldown,
-  // VxeRadio,
-  // VxeRadioButton,
+  VxePulldown,
+  VxeRadio,
+  VxeRadioButton,
   VxeRadioGroup,
   VxeSelect,
+  VxeSplit,
+  VxeSwitch,
+  VxeTabs,
+  VxeTag,
+  VxeText,
+  VxeTextarea,
+  VxeTip,
   VxeTooltip,
+  VxeTree,
+  VxeTreeSelect,
   VxeUI,
   VxeUpload,
-  // VxeSwitch,
-  // VxeTextarea,
 } from 'vxe-pc-ui';
 import enUS from 'vxe-pc-ui/lib/language/en-US';
 // 导入默认的语言
@@ -46,6 +56,11 @@ import {
 } from 'vxe-table';
 
 import { extendsDefaultFormatter } from './extends';
+
+// 导入主题变量，也可以重写主题变量
+import 'vxe-pc-ui/styles/cssvar.scss';
+import 'vxe-table/styles/cssvar.scss';
+import '@vxe-ui/plugin-render-antd/dist/style.css';
 
 // 是否加载过
 let isInit = false;
@@ -65,6 +80,10 @@ export function initVxeTable() {
     return;
   }
 
+  VxeUI.use(VxeUIPluginRenderAntd, {
+    // prefixCls: 'ant'
+  });
+
   VxeUI.component(VxeTable);
   VxeUI.component(VxeColumn);
   VxeUI.component(VxeColgroup);
@@ -72,30 +91,41 @@ export function initVxeTable() {
   VxeUI.component(VxeToolbar);
 
   VxeUI.component(VxeButton);
-  // VxeUI.component(VxeButtonGroup);
+  VxeUI.component(VxeLink);
+  VxeUI.component(VxeButtonGroup);
   VxeUI.component(VxeCheckbox);
-  // VxeUI.component(VxeCheckboxGroup);
+  VxeUI.component(VxeCheckboxGroup);
   VxeUI.component(createVirtualComponent('VxeForm'));
-  // VxeUI.component(VxeFormGather);
-  // VxeUI.component(VxeFormItem);
+  // VxeFormGroup已经过时，请使用VxeFormGroup
+  VxeUI.component(VxeFormGather);
+  VxeUI.component(VxeFormGroup);
+  VxeUI.component(VxeForm);
+  VxeUI.component(VxeFormItem);
+  VxeUI.component(VxeTag);
+  VxeUI.component(VxeText);
   VxeUI.component(VxeIcon);
   VxeUI.component(VxeInput);
-  // VxeUI.component(VxeList);
+  VxeUI.component(VxeList);
   VxeUI.component(VxeLoading);
   VxeUI.component(VxeModal);
   VxeUI.component(VxeNumberInput);
-  // VxeUI.component(VxeOptgroup);
-  // VxeUI.component(VxeOption);
+  VxeUI.component(VxeOptgroup);
+  VxeUI.component(VxeOption);
   VxeUI.component(VxePager);
-  // VxeUI.component(VxePulldown);
-  // VxeUI.component(VxeRadio);
-  // VxeUI.component(VxeRadioButton);
+  VxeUI.component(VxePulldown);
+  VxeUI.component(VxeRadio);
+  VxeUI.component(VxeRadioButton);
   VxeUI.component(VxeRadioGroup);
   VxeUI.component(VxeSelect);
-  // VxeUI.component(VxeSwitch);
-  // VxeUI.component(VxeTextarea);
+  VxeUI.component(VxeSwitch);
+  VxeUI.component(VxeTextarea);
   VxeUI.component(VxeTooltip);
+  VxeUI.component(VxeTip);
+  VxeUI.component(VxeTree);
+  VxeUI.component(VxeTreeSelect);
   VxeUI.component(VxeUpload);
+  VxeUI.component(VxeTabs);
+  VxeUI.component(VxeSplit);
 
   isInit = true;
 }

@@ -20,6 +20,7 @@ import {
   onMounted,
   onUnmounted,
   toRaw,
+  useAttrs,
   useSlots,
   useTemplateRef,
   watch,
@@ -54,6 +55,7 @@ interface Props extends VxeGridProps {
 }
 
 const props = withDefaults(defineProps<Props>(), {});
+const attrs = useAttrs();
 
 const FORM_SLOT_PREFIX = 'form-';
 
@@ -229,6 +231,9 @@ const options = computed(() => {
   if (mergedOptions.formConfig) {
     mergedOptions.formConfig.enabled = false;
   }
+
+  mergedOptions.editRules = attrs['edit-rules'] as any;
+  mergedOptions.data = attrs.data as any;
   return mergedOptions;
 });
 
@@ -300,7 +305,7 @@ async function init() {
   const enableProxyConfig = options.value.proxyConfig?.enabled;
   if (enableProxyConfig && autoLoad) {
     props.api.grid.commitProxy?.(
-      'query',
+      'initial',
       formOptions.value ? ((await formApi.getValues()) ?? {}) : {},
     );
     // props.api.reload(formApi.form?.values ?? {});
@@ -359,12 +364,12 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div :class="cn('bg-card h-full rounded-md', className)">
+  <div :class="cn('bg-card h-full overflow-hidden rounded-md', className)">
     <VxeGrid
       ref="gridRef"
       :class="
         cn(
-          'p-2',
+          'p-1 pb-2',
           {
             'pt-0': showToolbar && !formOptions,
           },
@@ -415,10 +420,10 @@ onUnmounted(() => {
           v-show="showSearchForm !== false"
           :class="
             cn(
-              'relative rounded py-3',
+              'relative rounded py-1',
               isCompactForm
                 ? isSeparator
-                  ? 'pb-8'
+                  ? 'pb-2'
                   : 'pb-4'
                 : isSeparator
                   ? 'pb-4'
@@ -457,7 +462,7 @@ onUnmounted(() => {
             :style="{
               ...(separatorBg ? { backgroundColor: separatorBg } : undefined),
             }"
-            class="bg-background-deep z-100 absolute -left-2 bottom-1 h-2 w-[calc(100%+1rem)] overflow-hidden md:bottom-2 md:h-3"
+            class="bg-background-deep z-100 absolute -left-1 bottom-1 h-1 w-[calc(100%+0.5rem)] overflow-hidden md:bottom-1 md:h-1.5"
           ></div>
         </div>
       </template>

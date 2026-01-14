@@ -46,6 +46,8 @@ const emit = defineEmits<{
   submit: [Recordable<any>];
 }>();
 
+const { VITE_GLOB_SHOW_CAPTCHA } = import.meta.env;
+
 const [Form, formApi] = useVbenForm(
   reactive({
     commonConfig: {
@@ -72,7 +74,11 @@ async function handleSubmit() {
       REMEMBER_ME_KEY,
       rememberMe.value ? values?.username : '',
     );
-    emit('submit', values);
+    const param = {
+      ...values,
+      grantType: VITE_GLOB_SHOW_CAPTCHA === 'true' ? 'CAPTCHA' : 'PASSWORD',
+    };
+    emit('submit', param);
   }
 }
 

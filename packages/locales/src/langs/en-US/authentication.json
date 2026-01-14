@@ -1,4 +1,6 @@
 {
+  "title": "Login",
+  "register": "Register",
   "welcomeBack": "Welcome Back",
   "pageTitle": "Plug-and-play Admin system",
   "pageDesc": "Efficient, versatile frontend template",
@@ -6,10 +8,15 @@
   "loginSuccessDesc": "Welcome Back",
   "loginSubtitle": "Enter your account details to manage your projects",
   "selectAccount": "Quick Select Account",
+  "accountLogin": "Account Login",
+  "phoneLogin": "Phone Login",
+  "emailLogin": "Email Login",
   "username": "Username",
   "password": "Password",
   "usernameTip": "Please enter username",
   "passwordErrorTip": "Password is incorrect",
+  "emailErrorTip": "Email format is incorrect",
+  "phoneErrorTip": "Phone number format is incorrect",
   "passwordTip": "Please enter password",
   "verifyRequiredTip": "Please complete the verification first",
   "rememberMe": "Remember Me",
@@ -27,7 +34,7 @@
   "agreeTip": "Please agree to the Privacy Policy and Terms",
   "goToLogin": "Login instead",
   "passwordStrength": "Use 8 or more characters with a mix of letters, numbers & symbols",
-  "forgetPassword": "Forget Password?",
+  "forgetPassword": "Forget Password",
   "forgetPasswordSubtitle": "Enter your email and we'll send you instructions to reset your password",
   "emailTip": "Please enter email",
   "emailValidErrorTip": "The email format you entered is incorrect",
@@ -61,5 +68,12 @@
     "center": "Align Center",
     "alignLeft": "Align Left",
     "alignRight": "Align Right"
+  },
+  "sso": {
+    "server-login": "Server login",
+    "client-login": "Client login"
+  },
+  "open": {
+    "index": "Index"
   }
 }

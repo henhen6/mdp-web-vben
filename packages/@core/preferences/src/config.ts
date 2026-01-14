@@ -2,10 +2,15 @@ import type { Preferences } from './types';
 
 const defaultPreferences: Preferences = {
   app: {
-    accessMode: 'frontend',
+    /** 权限模式 */
+    accessMode: 'backend',
+    /** 登录注册页面布局 */
     authPageLayout: 'panel-right',
+    /** 检查更新轮询时间 */
     checkUpdatesInterval: 1,
+    /** 是否开启灰色模式 */
     colorGrayMode: false,
+    /** 是否开启色弱模式 */
     colorWeakMode: false,
     compact: false,
     contentCompact: 'wide',
@@ -17,17 +22,21 @@ const defaultPreferences: Preferences = {
     contentPaddingTop: 0,
     defaultAvatar:
       'https://unpkg.com/@vbenjs/static-source@0.1.7/source/avatar-v1.webp',
-    defaultHomePath: '/analytics',
+    defaultHomePath: '/home',
     dynamicTitle: true,
     enableCheckUpdates: true,
+    /** 是否显示偏好设置 */
     enablePreferences: true,
+    /**
+     * @zh_CN 是否开启refreshToken
+     */
     enableRefreshToken: false,
     enableStickyPreferencesNavigationBar: true,
     isMobile: false,
     layout: 'sidebar-nav',
     locale: 'zh-CN',
     loginExpiredMode: 'page',
-    name: 'Vben Admin',
+    name: 'mdp',
     preferencesButtonPosition: 'auto',
     watermark: false,
     watermarkContent: '',
@@ -41,8 +50,8 @@ const defaultPreferences: Preferences = {
     styleType: 'normal',
   },
   copyright: {
-    companyName: 'Vben',
-    companySiteLink: 'https://www.vben.pro',
+    companyName: 'henhen6',
+    companySiteLink: 'https://mddata.top',
     date: '2024',
     enable: true,
     icp: '',
@@ -65,7 +74,7 @@ const defaultPreferences: Preferences = {
   logo: {
     enable: true,
     fit: 'contain',
-    source: 'https://unpkg.com/@vbenjs/static-source@0.1.7/source/logo-v1.webp',
+    source: 'resource/img/logo.png',
   },
   navigation: {
     accordion: true,
@@ -114,9 +123,8 @@ const defaultPreferences: Preferences = {
     colorPrimary: 'hsl(212 100% 45%)',
     colorSuccess: 'hsl(144 57% 58%)',
     colorWarning: 'hsl(42 84% 61%)',
-    mode: 'dark',
+    mode: 'auto',
     radius: '0.5',
-    fontSize: 16,
     semiDarkHeader: false,
     semiDarkSidebar: false,
   },

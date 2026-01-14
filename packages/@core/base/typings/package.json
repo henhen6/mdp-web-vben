@@ -27,6 +27,9 @@
     },
     "./vue-router": {
       "types": "./vue-router.d.ts"
+    },
+    "./axios": {
+      "types": "./axios.d.ts"
     }
   },
   "publishConfig": {
@@ -38,6 +41,7 @@
     }
   },
   "dependencies": {
+    "axios": "catalog:",
     "vue": "catalog:",
     "vue-router": "catalog:"
   }

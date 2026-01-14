@@ -5,6 +5,8 @@ import type { MenuProps } from '@vben-core/menu-ui';
 
 import { useRoute } from 'vue-router';
 
+import { isEmptyOrUnDef } from '@vben/utils';
+
 import { Menu } from '@vben-core/menu-ui';
 
 import { useNavigation } from './use-navigation';
@@ -31,7 +33,11 @@ async function handleSelect(key: string) {
   <Menu
     :accordion="accordion"
     :collapse="collapse"
-    :default-active="route.meta?.activePath || route.path"
+    :default-active="
+      isEmptyOrUnDef(route.meta?.activePath)
+        ? route.path
+        : route.meta?.activePath
+    "
     :menus="menus"
     :rounded="rounded"
     :theme="theme"

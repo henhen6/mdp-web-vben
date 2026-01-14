@@ -1,0 +1,32 @@
+{
+  "title": { "table": "Org" },
+  "id": "id",
+  "name": "name",
+  "orgType": "orgType",
+  "shortName": "shortName",
+  "parentId": "parentId",
+  "treePath": "treePath",
+  "weight": "weight",
+  "state": "state",
+  "remarks": "remarks",
+  "createdAt": "createdAt",
+  "createdBy": "createdBy",
+  "updatedAt": "updatedAt",
+  "updatedBy": "updatedBy",
+  "deletedBy": "deletedBy",
+  "deletedAt": "deletedAt",
+  "tips": {
+    "noDataSelected": "No data selected",
+    "deleteConfirm": "Selected nodes and their children will be permanently deleted, are you sure to delete?",
+    "treeLoadFailed": "Tree structure loading failed, please refresh the page",
+    "selectNodeToMove": "Please select the node to move",
+    "noNodeSelected": "No node selected yet",
+    "confirmMoveToRoot": "Are you sure to move [{currentName}] to [Root Node]",
+    "confirmMoveToChild": "Are you sure to move [{currentName}] to be a child node of [{parentName}]?",
+    "moveSuccess": "Move successfully",
+    "cannotMoveToParent": "Cannot move to its parent node",
+    "cannotMoveToSelf": "Cannot move to be its own child node",
+    "cannotMoveToDescendant": "Cannot move to its descendant node",
+    "companyCannotMoveToDept": "Company cannot be moved under department"
+  }
+}
