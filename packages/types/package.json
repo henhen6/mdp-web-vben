@@ -8,7 +8,7 @@
     "url": "git+https://github.com/vbenjs/vue-vben-admin.git",
     "directory": "packages/types"
   },
-  "license": "MIT",
+  "license": "AGPL-3.0",
   "type": "module",
   "exports": {
     ".": {

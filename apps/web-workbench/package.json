@@ -8,7 +8,7 @@
     "url": "git+https://github.com/vbenjs/vue-vben-admin.git",
     "directory": "apps/web-workbench"
   },
-  "license": "MIT",
+  "license": "AGPL-3.0",
   "author": {
     "name": "henhen6",
     "email": "ann.vben@gmail.com",
