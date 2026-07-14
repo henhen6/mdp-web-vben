@@ -1,4 +1,4 @@
-import type { Nullable } from "@vben-core/typings";
+import type { Nullable } from '@vben/types';
 
 /**
  * @description: base64 to blob
